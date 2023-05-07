@@ -19,7 +19,7 @@ client.on('ready', () => {
 client.on('messageCreate', (message) => {
   if (message.content.toLowerCase() == 'notify') {
     message.reply(
-      `hey! I am Notifier. I will notify Admin when someone starts playing a game!`
+      `hey! I am Notifier. I will notify SenkuBhai when someone starts playing a game!`
     )
   }
 })
@@ -46,31 +46,18 @@ function sendEmail(username, game) {
     },
   })
 
+  var maillist = [process.env.MAIL_SENDER, 'Rajonraj0300@gmail.com']
+
   // Define the email message
   const message = {
     from: process.env.MAIL_SENDER,
-    to: process.env.MAIL_RECEIVER,
-    subject: `${username} is playing ${game}`,
-    text: `${username} is playing ${game}`,
-  }
-
-  const messageTwo = {
-    from: process.env.MAIL_SENDER,
-    to: 'Rajonraj0300@gmail.com',
+    to: maillist,
     subject: `${username} is playing ${game}`,
     text: `${username} is playing ${game}`,
   }
 
   // Send the email
   transporter.sendMail(message, (error, info) => {
-    if (error) {
-      console.error(error)
-    } else {
-      console.log(`Email sent: ${info.response}`)
-    }
-  })
-
-  transporter.sendMail(messageTwo, (error, info) => {
     if (error) {
       console.error(error)
     } else {
